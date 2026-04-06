@@ -31,7 +31,8 @@ class Country(models.Model):
     area = models.PositiveIntegerField(help_text="Area in square kilometers")
     region = models.CharField(max_length=30, choices=REGION_CHOICES)
     description = models.TextField(blank=True)
-
+    image_url = models.URLField(blank=True)
+    
     neighbors = models.ManyToManyField(
         "self",
         blank=True,
@@ -51,8 +52,6 @@ class Country(models.Model):
 
 
 class Language(models.Model):
-    """Represents a language spoken in a country."""
-
     country = models.ForeignKey(
         Country,
         on_delete=models.CASCADE,
@@ -76,8 +75,6 @@ class Language(models.Model):
 
 
 class City(models.Model):
-    """Represents a major city of a country."""
-
     country = models.ForeignKey(
         Country,
         on_delete=models.CASCADE,

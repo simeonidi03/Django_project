@@ -14,12 +14,14 @@ class CountryForm(forms.ModelForm):
             "region",
             "description",
             "neighbors",
+            "image_url",
             "organizations",
         ]
         widgets = {
             "description": forms.Textarea(attrs={"rows": 4}),
             "neighbors": forms.CheckboxSelectMultiple(),
             "organizations": forms.CheckboxSelectMultiple(),
+            "image_url": forms.URLInput(attrs={"placeholder": "https://example.com/image.jpg"}),
         }
 
     def clean_name(self):
