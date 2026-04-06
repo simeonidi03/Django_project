@@ -98,6 +98,7 @@ geolearn_project/
 ├── db.sqlite3
 ├── manage.py
 └── README.md
+```
 
 ## How to run the project locally
 
