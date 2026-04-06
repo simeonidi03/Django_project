@@ -1,0 +1,69 @@
+{% extends "countries/base.html" %}
+
+{% block title %}{{ country.name }} | GeoLearn{% endblock %}
+
+{% block content %}
+    <h2>{{ country.name }}</h2>
+
+    <p><strong>Capital:</strong> {{ country.capital }}</p>
+    <p><strong>Region:</strong> {{ country.region }}</p>
+    <p><strong>Population:</strong> {{ country.population }}</p>
+    <p><strong>Area:</strong> {{ country.area }} km²</p>
+
+    {% if country.description %}
+        <p><strong>Description:</strong> {{ country.description }}</p>
+    {% endif %}
+
+    <hr>
+
+    <h3>Languages spoken by the population</h3>
+    {% if country.languages.all %}
+        <ul>
+            {% for language in country.languages.all %}
+                <li>{{ language.name }} — {{ language.speakers_percent }}%</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No language data available.</p>
+    {% endif %}
+
+    <h3>Neighboring countries</h3>
+    {% if country.neighbors.all %}
+        <ul>
+            {% for neighbor in country.neighbors.all %}
+                <li>{{ neighbor.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No neighboring countries listed.</p>
+    {% endif %}
+
+    <h3>Largest cities</h3>
+    {% if country.cities.all %}
+        <ul>
+            {% for city in country.cities.all %}
+                <li>{{ city.name }} — population {{ city.population }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No city data available.</p>
+    {% endif %}
+
+    <h3>International organizations</h3>
+    {% if country.organizations.all %}
+        <ul>
+            {% for organization in country.organizations.all %}
+                <li>{{ organization.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No organization data available.</p>
+    {% endif %}
+
+    <p style="margin-top: 24px;">
+        <a class="button-link" href="{% url 'country_list' %}">Back to countries</a>
+        <a class="button-link" href="{% url 'country_edit' country.id %}" style="margin-left: 10px;">
+            Edit country
+        </a>
+    </p>
+{% endblock %}

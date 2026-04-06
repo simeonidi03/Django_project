@@ -1,0 +1,26 @@
+{% extends "countries/base.html" %}
+
+{% block title %}Home | GeoLearn{% endblock %}
+
+{% block content %}
+    <h2>Welcome to GeoLearn</h2>
+
+    <p>
+        GeoLearn is an educational web application for studying countries,
+        their major languages, neighboring states, largest cities,
+        and participation in international organizations.
+    </p>
+
+    <p>
+        The platform has two main modes: learning mode and test mode.
+        In learning mode, users explore country information.
+        In test mode, users guess the country using geography clues.
+    </p>
+
+    <p style="margin-top: 24px;">
+        <a class="button-link" href="{% url 'country_list' %}">Browse countries</a>
+        <a class="button-link" href="{% url 'test_mode' %}" style="margin-left: 10px;">
+            Start test
+        </a>
+    </p>
+{% endblock %}

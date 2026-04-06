@@ -1,0 +1,35 @@
+{% extends "countries/base.html" %}
+
+{% block title %}Countries | GeoLearn{% endblock %}
+
+{% block content %}
+    <h2>Countries</h2>
+    <p>Browse the list of countries available in the learning portal.</p>
+
+    {% if countries %}
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr style="background-color: #e5e7eb;">
+                    <th style="padding: 12px; border: 1px solid #d1d5db; text-align: left;">Name</th>
+                    <th style="padding: 12px; border: 1px solid #d1d5db; text-align: left;">Capital</th>
+                    <th style="padding: 12px; border: 1px solid #d1d5db; text-align: left;">Region</th>
+                    <th style="padding: 12px; border: 1px solid #d1d5db; text-align: left;">Population</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for country in countries %}
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #d1d5db;">
+                            <a href="{% url 'country_detail' country.id %}">{{ country.name }}</a>
+                        </td>
+                        <td style="padding: 12px; border: 1px solid #d1d5db;">{{ country.capital }}</td>
+                        <td style="padding: 12px; border: 1px solid #d1d5db;">{{ country.region }}</td>
+                        <td style="padding: 12px; border: 1px solid #d1d5db;">{{ country.population }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No countries have been added yet.</p>
+    {% endif %}
+{% endblock %}

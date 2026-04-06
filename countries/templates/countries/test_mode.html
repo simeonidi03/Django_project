@@ -1,0 +1,98 @@
+{% extends "countries/base.html" %}
+
+{% block title %}Test mode | GeoLearn{% endblock %}
+
+{% block content %}
+    <h2>Test mode</h2>
+    <p>Use the clues below to guess the country.</p>
+
+    {% if country %}
+        <h3>Clues</h3>
+
+        <p><strong>Capital:</strong> {{ country.capital }}</p>
+        <p><strong>Region:</strong> {{ country.region }}</p>
+
+        <h4>Languages spoken by more than 50% of the population</h4>
+        <ul>
+            {% for language in country.languages.all %}
+                {% if language.speakers_percent > 50 %}
+                    <li>{{ language.name }} — {{ language.speakers_percent }}%</li>
+                {% endif %}
+            {% empty %}
+                <li>No language data available.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Neighboring countries</h4>
+        <ul>
+            {% for neighbor in country.neighbors.all %}
+                <li>{{ neighbor.name }}</li>
+            {% empty %}
+                <li>No neighboring countries listed.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Largest cities</h4>
+        <ul>
+            {% for city in country.cities.all %}
+                <li>{{ city.name }} — population {{ city.population }}</li>
+            {% empty %}
+                <li>No city data available.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>International organizations</h4>
+        <ul>
+            {% for organization in country.organizations.all %}
+                <li>{{ organization.name }}</li>
+            {% empty %}
+                <li>No organizations listed.</li>
+            {% endfor %}
+        </ul>
+
+        <form method="post" style="margin-top: 24px;">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div style="margin-bottom: 18px;">
+                    <label for="{{ field.id_for_label }}" style="display: block; font-weight: bold; margin-bottom: 6px;">
+                        {{ field.label }}
+                    </label>
+                    <div>{{ field }}</div>
+
+                    {% if field.help_text %}
+                        <div style="font-size: 14px; color: #6b7280; margin-top: 4px;">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div style="color: #b91c1c; margin-top: 6px;">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="button-link" style="border: none; cursor: pointer;">
+                Check answer
+            </button>
+        </form>
+
+        {% if result_message %}
+            <div style="margin-top: 20px; font-weight: bold;  color: #b91c1c">
+                {{ result_message }}
+            </div>
+        {% endif %}
+
+        {% if next_country %}
+            <p style="margin-top: 20px;">
+                <a class="button-link" href="{% url 'test_country' next_country.id %}">
+                    Next question
+                </a>
+            </p>
+        {% endif %}
+    {% else %}
+        <p>No countries are available for the test yet.</p>
+    {% endif %}
+{% endblock %}
