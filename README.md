@@ -107,37 +107,44 @@ geolearn_project/
 ```bash
 git clone <your-repository-link>
 cd geolearn_project
+```
 
 2. Create a virtual environment
+```bash
 python3 -m venv venv
-
-3. Activate the virtual environment
-On macOS / Linux:
 ```
+4. Activate the virtual environment
+On macOS / Linux:
+```bash
 source venv/bin/activate
 ```
 
 4. Install Django
+```bash
 pip install django
-5. Apply migrations
+```
+6. Apply migrations
+```bash
 python manage.py makemigrations
 python manage.py migrate
-6. Run the server
+```
+8. Run the server
+```bash
 python manage.py runserver
+```
 
 Then open:
-
 http://127.0.0.1:8000/
+
 Admin panel
-
 To create an admin user:
-
+```bash
 python manage.py createsuperuser
-
+```
 After that open:
-
+```bash
 http://127.0.0.1:8000/admin/
-
+```
 The admin panel can be used to:
 
 create countries,
@@ -155,7 +162,8 @@ capital cannot be empty,
 percentage cannot be greater than 100,
 answer in test mode cannot be empty,
 answer must contain at least 2 characters.
-Educational value
+
+## Educational value
 
 This project is designed as a geography learning portal.
 It can be useful for:
