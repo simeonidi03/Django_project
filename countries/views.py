@@ -8,8 +8,16 @@ def home(request):
 
 
 def country_list(request):
+    query = request.GET.get("q", "").strip()
     countries = Country.objects.all()
-    context = {"countries": countries}
+
+    if query:
+        countries = countries.filter(name__icontains=query)
+
+    context = {
+        "countries": countries,
+        "query": query,
+    }
     return render(request, "countries/country_list.html", context)
 
 def country_detail(request, country_id):
@@ -47,7 +55,6 @@ def country_edit(request, country_id):
 
 
 def test_mode(request):
-    """Redirect to the first available country test."""
     first_country = Country.objects.order_by("id").first()
     if first_country is None:
         return render(

@@ -6,6 +6,34 @@
     <h2>Countries</h2>
     <p>Browse the list of countries available in the learning portal.</p>
 
+    <form method="get" style="margin: 20px 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+    <input
+        type="text"
+        name="q"
+        value="{{ query }}"
+        placeholder="Search country by name"
+        style="padding: 10px; width: 280px; border: 1px solid #d1d5db; border-radius: 8px;"
+    >
+
+    <button
+        type="submit"
+        class="button-link"
+        style="border: none; cursor: pointer; min-width: 80px; height: 20px; margin-top: 0; font-family: Arial, sans-serif; font-size: 18px; font-weight: bold;"
+    >
+        Search
+    </button>
+
+    {% if query %}
+        <a
+            href="{% url 'country_list' %}"
+            class="button-link"
+            style="min-width: 80px; height: 20px; margin-top: 0; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;"
+        >
+            Reset
+        </a>
+    {% endif %}
+    </form>
+
     {% if countries %}
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <thead>
